@@ -1,0 +1,36 @@
+<template name="list">
+	{{> loginButtons}}
+
+	{{#if currentUser}}
+		<h3>Registered users:</h3>
+		<ul>
+			{{#each users}}
+				<li><a href="{{pathFor '/chat' _id=_id}}">{{email}}</a></li>
+			{{/each}}
+		</ul>
+	{{/if}}
+</template>
+
+<template name="chat">
+	{{#unless otr}}
+		<button id="test">start OTR</button>
+	{{else}}
+		<button id="end">end OTR</button>
+	{{/unless}}
+	
+	<br/>
+	
+	<form id="form">
+		<input type="text" id="msg" name="msg"/>
+		<button type="submit">send</button>
+	</form>
+	
+	<br/>
+	
+	<p>My key fingerprint: {{myKey}}</p>
+	<p>{{#with buddyKey}}Buddy fingerprint: {{this}}{{/with}}</p>
+	
+	<br/>
+
+	{{{final}}}
+</template>
